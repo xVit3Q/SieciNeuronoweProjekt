@@ -33,3 +33,22 @@ X_test_normal = NormalizacjaMinMax(X_test, train_min, train_max)
 
 # Silnik do trenowania modelu
 
+Neurons = 10
+#random.rand losuje z układu z przedziału (0,1)
+W1 = np.random.rand(X_train_normal.shape[1], Neurons) * 0.2 - 0.1
+W2 = np.random.rand(Neurons, 1) * 0.2 - 0.1
+
+#macierze zerowych predkosci
+vW1 = np.zeros_like(W1)
+vW2 = np.zeros_like(W2)
+
+vb1 = np.zeros_like((1, Neurons))
+vb2 = np.zeros_like((1, 1))
+
+
+
+def aktywacja_unipolarna(u, beta):
+  return 1 / (1+ np.exp(-beta * u))
+
+def pochodna_unipolar(y, beta):
+  return beta * y * (1-y)
